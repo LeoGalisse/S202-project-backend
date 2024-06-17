@@ -1,8 +1,8 @@
-import { PrismaPacientRepository } from '@/repositories/prisma/prisma-pacient-repository'
+import { MongoDBPacientRepository } from '@/repositories/mongodb/mongodb-pacient-repository'
 import { CreatePacientUseCase } from '@/use-cases/pacients/create-pacient.service'
 
 export function makeCreatePacientUseCase() {
-  const pacientRepository = new PrismaPacientRepository()
+  const pacientRepository = new MongoDBPacientRepository()
   const useCase = new CreatePacientUseCase(pacientRepository)
 
   return useCase

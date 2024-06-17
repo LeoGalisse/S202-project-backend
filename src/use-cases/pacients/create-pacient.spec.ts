@@ -16,6 +16,10 @@ describe('Create pacient Use Case', () => {
       userId: 'user-01',
     })
 
+    if (!pacient) {
+      throw new Error('Pacient not created')
+    }
+
     expect(pacient.id).toEqual(expect.any(String))
   })
 })

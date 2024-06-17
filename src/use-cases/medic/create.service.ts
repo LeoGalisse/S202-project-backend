@@ -1,6 +1,6 @@
 import { MedicRepository } from '@/repositories/medic-repository'
-import { Medic } from '@prisma/client'
 import { MedicAlreadyExistsError } from '../errors/medic-already-exists-error'
+import { MedicId } from '@/utils/models/medic'
 
 interface CreateMedicUseCaseRequest {
   bio?: string
@@ -9,7 +9,7 @@ interface CreateMedicUseCaseRequest {
 }
 
 interface CreateMedicUseCaseResponse {
-  medic: Medic
+  medic: MedicId | null
 }
 
 export class CreateMedicUseCase {
@@ -25,7 +25,7 @@ export class CreateMedicUseCase {
     const medic = await this.medicRepository.create({
       bio,
       crm,
-      user: { connect: { id: userId } },
+      userId,
     })
 
     return {

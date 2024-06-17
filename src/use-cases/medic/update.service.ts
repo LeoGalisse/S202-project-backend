@@ -1,11 +1,10 @@
-/* eslint-disable no-useless-constructor */
 import { MedicRepository } from '@/repositories/medic-repository'
-import { Medic, Prisma } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
+import { Medic, UpdateMedic } from '@/utils/models/medic'
 
 interface UpdateMedicUseCaseRequest {
   crm: string
-  data: Prisma.MedicUpdateInput
+  data: UpdateMedic
 }
 
 interface UpdateMedicUseCaseResponse {

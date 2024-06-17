@@ -1,9 +1,9 @@
-import { Medic, Prisma } from '@prisma/client'
+import { CreateMedic, Medic, MedicId, MedicWithId, UpdateMedic } from '@/utils/models/medic'
 import { MedicRepository } from '../medic-repository'
 import { randomUUID } from 'crypto'
 
 export class InMemoryMedicRepository implements MedicRepository {
-  private medicList: Medic[] = []
+  private medicList: MedicWithId[] = []
 
   async findAll(): Promise<Medic[] | null> {
     return this.medicList || null
@@ -17,41 +17,41 @@ export class InMemoryMedicRepository implements MedicRepository {
     return this.medicList.find((medic) => medic.crm === crm) || null
   }
 
-  async create(medic: Prisma.MedicCreateInput): Promise<Medic> {
+  async create(medic: CreateMedic): Promise<MedicId> {
     const createMedic = {
       id: randomUUID(),
       createdAt: new Date(),
-      updateAt: new Date(),
+      updatedAt: new Date(),
       userId: randomUUID(),
-      bio: medic.bio || null,
+      bio: medic.bio || undefined,
       crm: medic.crm,
     }
 
     this.medicList.push(createMedic)
 
-    return createMedic
+    return {
+      id: createMedic.id,
+    }
   }
 
-  async delete(crm: string): Promise<Medic> {
+  async delete(crm: string): Promise<boolean | null> {
     const index = this.medicList.findIndex((medic) => medic.crm === crm)
-
-    const medic = this.medicList[index]
 
     if (index !== -1) {
       this.medicList.splice(index, 1)
     }
 
-    return medic
+    return true
   }
 
-  async update(crm: string, data: Prisma.MedicUpdateInput) {
+  async update(crm: string, data: UpdateMedic) {
     const index = this.medicList.findIndex((m) => m.crm === crm)
 
     const medic = {
       id: String(''),
-      createdAt: data.createdAt as Date,
-      updateAt: new Date(),
-      userId: String(data.user),
+      createdAt: this.medicList[index].createdAt,
+      updatedAt: new Date(),
+      userId: this.medicList[index].userId,
       bio: String(data.bio),
       crm: String(data.crm),
     }

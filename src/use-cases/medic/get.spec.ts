@@ -13,10 +13,12 @@ describe('Get medic', () => {
   })
 
   it('should be able to get a medic', async () => {
-    const { crm } = await medicRepository.create({
+    await medicRepository.create({
       crm: '12345678910',
-      user: { connect: { id: '12345678910' } },
+      userId: '12345678910',
     })
+
+    const crm = '12345678910'
 
     const { medic } = await sut.execute({
       crm,

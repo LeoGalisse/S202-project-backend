@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import { PacientsRepository } from '@/repositories/pacients-repository'
-import { Pacient } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
+import { Pacient } from '@/utils/models/pacient'
 
 interface GetAllPacientsUseCaseResponse {
   pacients: Pacient[]

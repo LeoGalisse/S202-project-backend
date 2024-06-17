@@ -18,7 +18,7 @@ describe('Authenticate Use Case', () => {
       rg: 'MG-111.111.11',
       cpf: '123.456.789-00',
       gender: 'male',
-      birthdate: new Date('1990-01-01'),
+      birthDate: new Date('1990-01-01'),
       email: 'johndoe@example.com',
       password: '123456',
     })
@@ -28,7 +28,7 @@ describe('Authenticate Use Case', () => {
       password: '123456',
     })
 
-    expect(user.id).toEqual(expect.any(String))
+    expect(user.cpf).toEqual(expect.any(String))
   })
 
   it('should not be able to authenticate with wrong email', async () => {
@@ -46,7 +46,7 @@ describe('Authenticate Use Case', () => {
       rg: 'MG-111.111.11',
       cpf: '123.456.789-00',
       gender: 'male',
-      birthdate: new Date('1990-01-01'),
+      birthDate: new Date('1990-01-01'),
       email: 'johndoe@example.com',
       password: '123456',
     })

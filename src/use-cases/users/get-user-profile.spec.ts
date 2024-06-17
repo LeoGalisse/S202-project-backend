@@ -18,13 +18,13 @@ describe('Get User Profile Use Case', () => {
       rg: 'MG-111.111.11',
       cpf: '123.456.789-00',
       gender: 'male',
-      birthdate: new Date('1990-01-01'),
+      birthDate: new Date('1990-01-01'),
       email: 'johndoe@example.com',
       password: '123456',
     })
 
     const { user } = await sut.execute({
-      userId: createdUser.id,
+      userId: createdUser.insertedId,
     })
 
     expect(user.name).toEqual('John Doe')

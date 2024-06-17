@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import { UsersRepository } from '@/repositories/users-repository'
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
-import { User } from '@prisma/client'
+import { UserId } from '@/utils/models/user'
 import { hash } from 'bcryptjs'
 
 interface RegisterUseCaseRequest {
@@ -16,7 +16,7 @@ interface RegisterUseCaseRequest {
 }
 
 interface RegisterUseCaseResponse {
-  user: User
+  user: UserId | null
 }
 
 export class RegisterUseCase {
@@ -46,7 +46,7 @@ export class RegisterUseCase {
       rg,
       cpf,
       gender,
-      birthdate,
+      birthDate: birthdate,
       email,
       password: passwordHashed,
     })

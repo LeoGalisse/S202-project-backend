@@ -25,11 +25,11 @@ describe('Register Use Case', () => {
         password: '123456',
       })
 
-      expect(user.id).toEqual(expect.any(String))
+      expect(user?.insertedId).toEqual(expect.any(String))
     })
 
     it('should hash user password upon registration', async () => {
-      const { user } = await sut.execute({
+      await sut.execute({
         name: 'John Doe',
         rg: 'MG-111.111.11',
         cpf: '123.456.789-00',
@@ -38,6 +38,12 @@ describe('Register Use Case', () => {
         email: 'johndoe@example.com',
         password: '123456',
       })
+
+      const user = await usersRepository.findByEmail('johndoe@example.com')
+
+      if (!user) {
+        throw new Error('User not found')
+      }
 
       const isPasswordCorrectlyHashed = await compare('123456', user.password)
 

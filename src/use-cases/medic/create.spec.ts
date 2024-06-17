@@ -19,6 +19,10 @@ describe('Create Medic (e2e)', () => {
       userId: '12345678910',
     })
 
+    if (!medic) {
+      throw new Error('Medic not created')
+    }
+
     expect(medic.id).toEqual(expect.any(String))
   })
 

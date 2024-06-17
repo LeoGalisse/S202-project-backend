@@ -1,9 +1,9 @@
+import { CreatePacient, PacientWithId } from '@/utils/models/pacient'
 import { PacientsRepository } from '../pacients-repository'
-import { Prisma, Pacient } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryPacientRepository implements PacientsRepository {
-  private items: Pacient[] = []
+  private items: PacientWithId[] = []
 
   async findAll() {
     return this.items || null
@@ -19,12 +19,12 @@ export class InMemoryPacientRepository implements PacientsRepository {
     return pacient
   }
 
-  async create(data: Prisma.PacientUncheckedCreateInput) {
-    const pacient: Pacient = {
+  async create(data: CreatePacient) {
+    const pacient = {
       id: randomUUID(),
       userId: data.userId,
       createdAt: new Date(),
-      updateAt: new Date(),
+      updatedAt: new Date(),
     }
 
     this.items.push(pacient)
@@ -35,11 +35,10 @@ export class InMemoryPacientRepository implements PacientsRepository {
   async delete(userId: string) {
     const index = this.items.findIndex((item) => item.userId === userId)
 
-    const item = this.items[index]
     if (index === -1) {
       this.items.splice(index, 1)
     }
 
-    return item
+    return true
   }
 }

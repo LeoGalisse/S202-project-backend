@@ -13,9 +13,6 @@ describe('Delete Pacient Use Case', () => {
 
   it('should be able to delete a pacient', async () => {
     await pacientsRepository.create({
-      id: '123',
-      createdAt: new Date(),
-      updateAt: null,
       userId: 'user-01',
     })
 

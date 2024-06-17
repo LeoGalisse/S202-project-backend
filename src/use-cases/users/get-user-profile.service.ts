@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import { UsersRepository } from '@/repositories/users-repository'
-import { User } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
+import { User } from '@/utils/models/user'
 
 interface GetUserProfileUseCaseRequest {
   userId: string

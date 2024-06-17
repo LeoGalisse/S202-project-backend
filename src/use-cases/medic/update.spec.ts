@@ -15,7 +15,7 @@ describe('Update Medic Use Case', () => {
   it('should be able to update a medic', async () => {
     await medicRepository.create({
       crm: '12345678910',
-      user: { connect: { id: '12345678910' } },
+      userId: '12345678910',
     })
 
     const { medic } = await sut.execute({

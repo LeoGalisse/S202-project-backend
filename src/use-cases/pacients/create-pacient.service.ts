@@ -1,13 +1,12 @@
-/* eslint-disable no-useless-constructor */
 import { PacientsRepository } from '@/repositories/pacients-repository'
-import { Pacient } from '@prisma/client'
+import { PacientId } from '@/utils/models/pacient'
 
 interface CreatePacientUseCaseRequest {
   userId: string
 }
 
 interface CreatePacientUseCaseResponse {
-  pacient: Pacient
+  pacient: PacientId | null
 }
 
 export class CreatePacientUseCase {

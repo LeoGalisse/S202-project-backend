@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import { MedicRepository } from '@/repositories/medic-repository'
-import { Medic } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
+import { Medic } from '@/utils/models/medic'
 
 interface GetMedicUseCaseRequest {
   crm: string

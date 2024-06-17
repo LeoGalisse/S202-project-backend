@@ -1,7 +1,7 @@
-import { Appointment, Prisma } from '@prisma/client'
+import { Appointment, AppointmentId, CreateAppointment } from '@/utils/models/appointment'
 
 export interface AppointmentRepository {
-  create(appointment: Prisma.AppointmentCreateInput): Promise<Appointment>
+  create(appointment: CreateAppointment): Promise<AppointmentId | null>
   update(appointment: Appointment): Promise<void>
   findByAppointmentId(appointmentId: string): Promise<Appointment | null>
   findByPacientId(pacientId: string): Promise<Appointment[] | void>

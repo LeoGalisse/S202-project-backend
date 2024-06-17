@@ -1,8 +1,7 @@
-import { Medic } from '@prisma/client'
+import { Medic } from '@/utils/models/medic'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 import { MedicRepository } from '@/repositories/medic-repository'
 
-/* eslint-disable no-useless-constructor */
 interface MedicUseCaseResponse {
   medics: Medic[]
 }

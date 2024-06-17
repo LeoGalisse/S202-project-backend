@@ -12,13 +12,13 @@ describe('Get all medic', () => {
   })
 
   it('should be able to get all medics', async () => {
-    const createMedic = await medicRepository.create({
+    await medicRepository.create({
       crm: '12345678910',
-      user: { connect: { id: '12345678910' } },
+      userId: '12345678910',
     })
 
     const { medics } = await sut.execute()
 
-    expect(medics[0].id).toEqual(createMedic.id)
+    expect(medics[0].userId).toEqual('12345678910')
   })
 })

@@ -14,7 +14,7 @@ describe('Delete medic', () => {
   it('should be able to delete a medic', async () => {
     await medicRepository.create({
       crm: '12345678910',
-      user: { connect: { id: '12345678910' } },
+      userId: '12345678910',
     })
 
     await sut.execute({ crm: '12345678910' })
