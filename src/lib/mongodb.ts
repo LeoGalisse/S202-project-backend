@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb'
 
 export const client = new MongoClient(env.DATABASE_URL)
 
-async function connect() {
+export async function connect() {
   try {
     await client.connect()
     console.log('Connected to MongoDB')
@@ -13,7 +13,7 @@ async function connect() {
   }
 }
 
-async function close() {
+export async function close() {
   try {
     await client.close()
     console.log('Disconnected from MongoDB')
@@ -21,5 +21,3 @@ async function close() {
     console.error('Error closing MongoDB connection:', error)
   }
 }
-
-module.exports = { client, connect, close }
