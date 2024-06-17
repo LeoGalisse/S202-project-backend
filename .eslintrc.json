@@ -1,0 +1,7 @@
+{
+  "extends": "@cp2ejr/eslint-config/node",
+  "rules": {
+    "camelcase": "off",
+    "no-useless-constructor": "off"
+  }
+}

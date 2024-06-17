@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  socialName String?  @map("social_name")
+  rg         String
+  cpf        String
+  gender     String
+  birthdate  DateTime
+  email      String   @unique
+  password   String
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  pacient Pacient?
+  medic   Medic?
+
+  @@map("users")
+}
+
+model Pacient {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String    @unique @map("user_id") @db.ObjectId
+  createdAt DateTime  @default(now()) @map("created_at")
+  updateAt  DateTime? @updatedAt @map("updated_at")
+
+  user         User          @relation(fields: [userId], references: [id])
+  appointments Appointment[]
+
+  @@map("pacients")
+}
+
+model Medic {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String    @unique @map("user_id") @db.ObjectId
+  bio       String?
+  crm       String    @unique
+  createdAt DateTime  @default(now()) @map("created_at")
+  updateAt  DateTime? @updatedAt @map("updated_at")
+
+  user         User          @relation(fields: [userId], references: [id])
+  appointments Appointment[]
+
+  @@map("medics")
+}
+
+model Appointment {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  pacientId   String   @map("pacient_id") @db.ObjectId
+  medicId     String   @map("medic_id") @db.ObjectId
+  date        DateTime
+  status      String?  @default("pending")
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  pacient Pacient @relation(fields: [pacientId], references: [id])
+  medic   Medic   @relation(fields: [medicId], references: [id])
+
+  @@map("appointments")
+}
