@@ -6,4 +6,5 @@ export interface PacientsRepository {
   findAll(): Promise<User[] | null>
   create(data: CreatePacient): Promise<PacientId | null>
   delete(id: string): Promise<boolean | null>
+  getPacientName(id: string): Promise<string | null>
 }

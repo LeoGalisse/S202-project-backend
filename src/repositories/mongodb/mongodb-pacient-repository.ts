@@ -64,4 +64,14 @@ export class MongoDBPacientRepository implements PacientsRepository {
       return null
     }
   }
+
+  async getPacientName(id: string): Promise<string | null> {
+    const pacient = await this.usersRepository.findById(id)
+
+    if (pacient) {
+      return pacient.name
+    }
+
+    return null
+  }
 }

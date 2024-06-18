@@ -23,3 +23,13 @@ export interface CreateAppointment {
 export interface AppointmentId {
   id: string
 }
+
+export interface AppointmentWithName {
+  medicName: string
+  pacientName: string
+  date: Date
+  status?: string
+  description?: string
+  createdAt: Date
+  updatedAt: Date
+}

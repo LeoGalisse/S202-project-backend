@@ -1,10 +1,10 @@
 import { AppointmentRepository } from '@/repositories/appointment-repository'
 import { CouldNotCreateError } from '../errors/could-not-create-error'
-import { Appointment } from '@/utils/models/appointment'
+import { AppointmentWithName } from '@/utils/models/appointment'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface GetAllAppointmentsUseCaseResponse {
-  appointments: Appointment[]
+  appointments: AppointmentWithName[]
 }
 
 export class GetAllAppointmentsUseCase {

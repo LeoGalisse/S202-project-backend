@@ -1,4 +1,9 @@
-import { Appointment, AppointmentId, CreateAppointment } from '@/utils/models/appointment'
+import {
+  Appointment,
+  AppointmentId,
+  AppointmentWithName,
+  CreateAppointment,
+} from '@/utils/models/appointment'
 
 export interface AppointmentRepository {
   create(appointment: CreateAppointment): Promise<AppointmentId | null>
@@ -7,5 +12,5 @@ export interface AppointmentRepository {
   findByPacientId(pacientId: string): Promise<Appointment[] | void>
   findByMedicId(medicId: string): Promise<Appointment[] | void>
   deleteByAppointmentId(appointmentId: string): Promise<void>
-  getAll(): Promise<Appointment[] | void>
+  getAll(): Promise<AppointmentWithName[] | void>
 }
