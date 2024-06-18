@@ -1,10 +1,9 @@
-/* eslint-disable no-useless-constructor */
 import { PacientsRepository } from '@/repositories/pacients-repository'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
-import { Pacient } from '@/utils/models/pacient'
+import { User } from '@/utils/models/user'
 
 interface GetAllPacientsUseCaseResponse {
-  pacients: Pacient[]
+  pacients: User[]
 }
 
 export class GetAllPacientsUseCase {

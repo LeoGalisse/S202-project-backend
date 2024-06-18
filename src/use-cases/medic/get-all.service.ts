@@ -1,9 +1,9 @@
-import { Medic } from '@/utils/models/medic'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 import { MedicRepository } from '@/repositories/medic-repository'
+import { User } from '@/utils/models/user'
 
 interface MedicUseCaseResponse {
-  medics: Medic[]
+  medics: User[]
 }
 
 export class GetAllMedicsUseCase {

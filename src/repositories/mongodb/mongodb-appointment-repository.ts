@@ -51,4 +51,10 @@ export class MongoDBAppointmentRepository implements AppointmentRepository {
   async deleteByAppointmentId(appointmentId: string): Promise<void> {
     await this.appointmentCollection.deleteOne({ _id: new ObjectId(appointmentId) })
   }
+
+  async getAll(): Promise<void | Appointment[]> {
+    const appointments = await this.appointmentCollection.find().toArray()
+
+    return appointments
+  }
 }

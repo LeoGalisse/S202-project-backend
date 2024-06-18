@@ -7,7 +7,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createMedicBodySchema = z.object({
     pacientId: z.string(),
     medicId: z.string(),
-    date: z.date(),
+    date: z.string(),
   })
 
   const { pacientId, medicId, date } = createMedicBodySchema.parse(request.body)
@@ -18,7 +18,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     const { appointment } = await createUseCase.execute({
       medicId,
       pacientId,
-      date,
+      date: new Date(date),
     })
 
     return reply.status(201).send({ appointment })

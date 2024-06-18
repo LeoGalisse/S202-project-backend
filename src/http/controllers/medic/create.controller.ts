@@ -3,22 +3,14 @@ import { makeCreateMedicUseCase } from '@/use-cases/factories/medic/make-create-
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-interface jwtDecoded {
-  role: string
-  sub: string
-  iat: number
-  exp: number
-}
-
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createMedicBodySchema = z.object({
     bio: z.string().optional(),
     crm: z.string().regex(/(^\d{8}-\d{1}$)/),
+    userId: z.string(),
   })
 
-  const { sub: userId }: jwtDecoded = await request.jwtDecode()
-
-  const { bio, crm } = createMedicBodySchema.parse(request.body)
+  const { bio, crm, userId } = createMedicBodySchema.parse(request.body)
 
   try {
     const createUseCase = makeCreateMedicUseCase()

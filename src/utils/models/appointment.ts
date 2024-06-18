@@ -18,8 +18,6 @@ export interface CreateAppointment {
   date: Date
   status?: string
   description?: string
-  createdAt: Date
-  updatedAt: Date
 }
 
 export interface AppointmentId {

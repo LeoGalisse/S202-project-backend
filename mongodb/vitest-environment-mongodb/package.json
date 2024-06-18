@@ -1,8 +1,8 @@
 {
-  "name": "vitest-environment-prisma",
+  "name": "vitest-environment-mongodb",
   "version": "1.0.0",
   "description": "",
-  "main": "prisma-test-environment.ts",
+  "main": "mongodb-test-environment.ts",
   "keywords": [],
   "author": "",
   "license": "ISC"

@@ -10,7 +10,7 @@ export async function medicRoutes(app: FastifyInstance) {
 
   app.post('/medic', create)
   app.get('/medic/:crm', get)
-  app.get('/medic', getAll)
+  app.get('/medics', getAll)
   app.delete('/medic/:crm', deleteMedic)
   app.put('/medic', updateMedic)
 }

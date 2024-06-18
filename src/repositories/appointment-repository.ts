@@ -7,4 +7,5 @@ export interface AppointmentRepository {
   findByPacientId(pacientId: string): Promise<Appointment[] | void>
   findByMedicId(medicId: string): Promise<Appointment[] | void>
   deleteByAppointmentId(appointmentId: string): Promise<void>
+  getAll(): Promise<Appointment[] | void>
 }

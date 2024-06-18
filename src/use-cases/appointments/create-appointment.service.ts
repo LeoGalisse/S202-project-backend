@@ -1,9 +1,9 @@
 import { MedicRepository } from '@/repositories/medic-repository'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
-import { Appointment } from '@prisma/client'
 import { AppointmentRepository } from '@/repositories/appointment-repository'
 import { CouldNotCreateError } from '../errors/could-not-create-error'
 import { PacientsRepository } from '@/repositories/pacients-repository'
+import { AppointmentId } from '@/utils/models/appointment'
 
 interface CreateAppointmentUseCaseRequest {
   pacientId: string
@@ -12,7 +12,7 @@ interface CreateAppointmentUseCaseRequest {
 }
 
 interface CreateAppointmentUseCaseResponse {
-  appointment: Appointment
+  appointment: AppointmentId | null
 }
 
 export class CreateAppointmentUseCase {
@@ -41,8 +41,8 @@ export class CreateAppointmentUseCase {
 
     try {
       const appointment = await this.appoitmentRepository.create({
-        medic: { connect: { id: medicId } },
-        pacient: { connect: { id: pacientId } },
+        medicId,
+        pacientId,
         date,
       })
 

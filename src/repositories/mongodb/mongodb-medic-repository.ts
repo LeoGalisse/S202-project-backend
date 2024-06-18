@@ -2,17 +2,24 @@ import { client } from '@/lib/mongodb'
 import { MedicRepository } from '../medic-repository'
 import { Collection, ObjectId } from 'mongodb'
 import { CreateMedic, Medic, MedicId, UpdateMedic } from '@/utils/models/medic'
+import { User } from '@/utils/models/user'
+import { UsersRepository } from '../users-repository'
 
 export class MongoDBMedicRepository implements MedicRepository {
   private medicCollection: Collection<Medic>
 
-  constructor() {
+  constructor(private usersRepository: UsersRepository) {
     this.medicCollection = client.db().collection<Medic>('medics')
   }
 
-  async findAll(): Promise<Medic[] | null> {
+  async findAll(): Promise<(User & object)[] | null> {
     try {
-      return await this.medicCollection.find().toArray()
+      const medics = await this.medicCollection.find().toArray()
+
+      const usersPromises = medics.map((medic) => this.usersRepository.findById(medic.userId))
+      const users = await Promise.all(usersPromises)
+
+      return users.filter((user) => user !== null) as (User & object)[]
     } catch (err) {
       return null
     }
