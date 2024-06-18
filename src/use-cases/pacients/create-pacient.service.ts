@@ -10,7 +10,7 @@ interface CreatePacientUseCaseResponse {
 }
 
 export class CreatePacientUseCase {
-  constructor(private pacientRepository: PacientsRepository) {}
+  constructor(private pacientRepository: PacientsRepository) { }
 
   async execute({ userId }: CreatePacientUseCaseRequest): Promise<CreatePacientUseCaseResponse> {
     const pacient = await this.pacientRepository.create({
