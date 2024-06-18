@@ -9,4 +9,5 @@ export interface MedicRepository {
   delete(id: string): Promise<boolean | null>
   update(id: string, data: UpdateMedic): Promise<Medic | null>
   getMedicName(id: string): Promise<string | null>
+  findByUserId(id: string): Promise<Medic | null>
 }

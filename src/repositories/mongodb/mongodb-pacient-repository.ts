@@ -31,6 +31,16 @@ export class MongoDBPacientRepository implements PacientsRepository {
     return pacient
   }
 
+  async findByUserId(userId: string): Promise<Pacient | null> {
+    try {
+      const pacient = await this.pacientsCollection.findOne({ userId })
+
+      return pacient
+    } catch (err) {
+      return null
+    }
+  }
+
   async create(data: CreatePacient): Promise<PacientId | null> {
     const pacient = await this.pacientsCollection.insertOne({
       ...data,

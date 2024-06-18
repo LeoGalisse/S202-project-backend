@@ -31,6 +31,16 @@ export class MongoDBMedicRepository implements MedicRepository {
     return medic
   }
 
+  async findByUserId(userId: string): Promise<Medic | null> {
+    try {
+      const medic = await this.medicCollection.findOne({ userId })
+
+      return medic
+    } catch (err) {
+      return null
+    }
+  }
+
   async findByCRM(crm: string): Promise<Medic | null> {
     try {
       const medic = await this.medicCollection.findOne({ crm })

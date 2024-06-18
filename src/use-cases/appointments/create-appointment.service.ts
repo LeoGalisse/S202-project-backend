@@ -27,13 +27,13 @@ export class CreateAppointmentUseCase {
     medicId,
     date,
   }: CreateAppointmentUseCaseRequest): Promise<CreateAppointmentUseCaseResponse> {
-    const pacient = await this.pacientRepository.findById(pacientId)
+    const pacient = await this.pacientRepository.findByUserId(pacientId)
 
     if (!pacient) {
       throw new ResourceNotFoundError()
     }
 
-    const medic = await this.medicRepository.findById(medicId)
+    const medic = await this.medicRepository.findByUserId(medicId)
 
     if (!medic) {
       throw new ResourceNotFoundError()
