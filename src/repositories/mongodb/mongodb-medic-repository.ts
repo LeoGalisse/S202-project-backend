@@ -90,10 +90,16 @@ export class MongoDBMedicRepository implements MedicRepository {
   }
 
   async getMedicName(id: string): Promise<string | null> {
-    const medic = await this.usersRepository.findById(id)
+    const medic = await this.findById(id)
 
-    if (medic) {
-      return medic.name
+    if (!medic) {
+      return null
+    }
+
+    const user = await this.usersRepository.findById(medic.userId)
+
+    if (user) {
+      return user.name
     }
 
     return null
