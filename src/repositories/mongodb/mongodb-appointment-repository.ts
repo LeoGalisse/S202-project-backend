@@ -38,9 +38,33 @@ export class MongoDBAppointmentRepository implements AppointmentRepository {
   }
 
   async update(appointment: UpdateAppointment): Promise<void> {
+    let medic
+    let pacient
+    if (appointment.medicId) {
+      medic = await this.medicsRepository.findByUserId(appointment.medicId)
+    }
+
+    if (appointment.pacientId) {
+      pacient = await this.pacientsRepository.findByUserId(appointment.pacientId)
+    }
+
+    if (!medic || !pacient) {
+      throw new Error('Medic or Pacient not found')
+    }
+
     const updatedAppointment = await this.appointmentCollection.updateOne(
       { _id: new ObjectId(appointment.id) },
-      { $set: appointment },
+      {
+        $set: {
+          medicId: medic._id.toString(),
+          pacientId: pacient._id.toString(),
+          date: appointment.date,
+          description: appointment.description,
+          status: appointment.status,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      },
     )
 
     if (updatedAppointment.modifiedCount === 0) {
