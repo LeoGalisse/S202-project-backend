@@ -20,6 +20,15 @@ export interface CreateAppointment {
   description?: string
 }
 
+export interface UpdateAppointment {
+  id: string
+  status?: string
+  description?: string
+  medicId?: string
+  pacientId?: string
+  date?: Date
+}
+
 export interface AppointmentId {
   id: string
 }

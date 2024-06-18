@@ -1,9 +1,9 @@
 import {
   Appointment,
   AppointmentId,
-  AppointmentWithId,
   AppointmentWithName,
   CreateAppointment,
+  UpdateAppointment,
 } from '@/utils/models/appointment'
 import { AppointmentRepository } from '../appointment-repository'
 import { Collection, ObjectId } from 'mongodb'
@@ -37,8 +37,15 @@ export class MongoDBAppointmentRepository implements AppointmentRepository {
     return null
   }
 
-  async update(appointment: AppointmentWithId): Promise<void> {
-    await this.appointmentCollection.updateOne({ _id: new ObjectId(appointment.id) }, { $set: appointment })
+  async update(appointment: UpdateAppointment): Promise<void> {
+    const updatedAppointment = await this.appointmentCollection.updateOne(
+      { _id: new ObjectId(appointment.id) },
+      { $set: appointment },
+    )
+
+    if (updatedAppointment.modifiedCount === 0) {
+      throw new Error('Appointment not found')
+    }
   }
 
   async findByAppointmentId(appointmentId: string): Promise<null | Appointment> {

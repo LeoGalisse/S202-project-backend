@@ -4,13 +4,13 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
-  const createMedicBodySchema = z.object({
+  const createAppointmentBodySchema = z.object({
     pacientId: z.string(),
     medicId: z.string(),
     date: z.string(),
   })
 
-  const { pacientId, medicId, date } = createMedicBodySchema.parse(request.body)
+  const { pacientId, medicId, date } = createAppointmentBodySchema.parse(request.body)
 
   try {
     const createUseCase = makeCreateAppointmentUseCase()
