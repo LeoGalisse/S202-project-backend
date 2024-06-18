@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+
 export interface Medic {
   userId: string
   crm: string
@@ -7,7 +9,7 @@ export interface Medic {
 }
 
 export interface MedicWithId extends Medic {
-  id: string
+  _id: ObjectId
 }
 
 export interface CreateMedic {

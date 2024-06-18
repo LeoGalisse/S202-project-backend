@@ -1,7 +1,7 @@
 import { client } from '@/lib/mongodb'
 import { MedicRepository } from '../medic-repository'
 import { Collection, ObjectId } from 'mongodb'
-import { CreateMedic, Medic, MedicId, UpdateMedic } from '@/utils/models/medic'
+import { CreateMedic, Medic, MedicId, MedicWithId, UpdateMedic } from '@/utils/models/medic'
 import { User } from '@/utils/models/user'
 import { UsersRepository } from '../users-repository'
 
@@ -31,7 +31,7 @@ export class MongoDBMedicRepository implements MedicRepository {
     return medic
   }
 
-  async findByUserId(userId: string): Promise<Medic | null> {
+  async findByUserId(userId: string): Promise<MedicWithId | null> {
     try {
       const medic = await this.medicCollection.findOne({ userId })
 

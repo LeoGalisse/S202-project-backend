@@ -1,4 +1,4 @@
-import { CreatePacient, Pacient, PacientId } from '@/utils/models/pacient'
+import { CreatePacient, Pacient, PacientId, PacientWithId } from '@/utils/models/pacient'
 import { User } from '@/utils/models/user'
 
 export interface PacientsRepository {
@@ -7,5 +7,5 @@ export interface PacientsRepository {
   create(data: CreatePacient): Promise<PacientId | null>
   delete(id: string): Promise<boolean | null>
   getPacientName(id: string): Promise<string | null>
-  findByUserId(id: string): Promise<Pacient | null>
+  findByUserId(id: string): Promise<PacientWithId | null>
 }

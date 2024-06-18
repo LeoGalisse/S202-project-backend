@@ -1,4 +1,4 @@
-import { CreatePacient, Pacient, PacientId } from '@/utils/models/pacient'
+import { CreatePacient, Pacient, PacientId, PacientWithId } from '@/utils/models/pacient'
 import { PacientsRepository } from '../pacients-repository'
 import { client } from '@/lib/mongodb'
 import { Collection, ObjectId } from 'mongodb'
@@ -31,7 +31,7 @@ export class MongoDBPacientRepository implements PacientsRepository {
     return pacient
   }
 
-  async findByUserId(userId: string): Promise<Pacient | null> {
+  async findByUserId(userId: string): Promise<PacientWithId | null> {
     try {
       const pacient = await this.pacientsCollection.findOne({ userId })
 

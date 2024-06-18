@@ -41,8 +41,8 @@ export class CreateAppointmentUseCase {
 
     try {
       const appointment = await this.appoitmentRepository.create({
-        medicId,
-        pacientId,
+        medicId: medic._id.toString(),
+        pacientId: pacient._id.toString(),
         date,
       })
 

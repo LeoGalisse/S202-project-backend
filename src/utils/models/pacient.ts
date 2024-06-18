@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+
 export interface Pacient {
   userId: string
   createdAt: Date
@@ -5,7 +7,7 @@ export interface Pacient {
 }
 
 export interface PacientWithId extends Pacient {
-  id: string
+  _id: ObjectId
 }
 
 export interface CreatePacient {
